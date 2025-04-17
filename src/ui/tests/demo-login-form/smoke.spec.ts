@@ -12,7 +12,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
     message: "#errorMessageOnRegister",
   };
 
-  const valid = {
+  const validData = {
     username: "ValidUser",
     password: "Password123!",
     minUser: "Usr",
@@ -21,7 +21,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
     maxPass: "ThisIsAValidPasswordWith20CharacteR1",
   };
 
-  const invalid = {
+  const invalidData = {
     shortUser: "Us",
     spacesOnly: "     ",
   };
@@ -36,24 +36,24 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
     const successText =
       "Successfully registered! Please, click Back to return on login page";
     test("Register with valid data", async ({ page }) => {
-      await page.locator(selectors.username).fill(valid.username);
-      await page.locator(selectors.password).fill(valid.password);
+      await page.locator(selectors.username).fill(validData.username);
+      await page.locator(selectors.password).fill(validData.password);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toHaveText(successText);
     });
 
     test("Register with min allowed length", async ({ page }) => {
-      await page.locator(selectors.username).fill(valid.minUser);
-      await page.locator(selectors.password).fill(valid.minPass);
+      await page.locator(selectors.username).fill(validData.minUser);
+      await page.locator(selectors.password).fill(validData.minPass);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toHaveText(successText);
     });
 
     test("Register with max allowed length", async ({ page }) => {
-      await page.locator(selectors.username).fill(valid.maxUser);
-      await page.locator(selectors.password).fill(valid.maxPass);
+      await page.locator(selectors.username).fill(validData.maxUser);
+      await page.locator(selectors.password).fill(validData.maxPass);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toHaveText(successText);
@@ -63,7 +63,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
   // Негативные кейсы
   test.describe("Negative cases", () => {
     test("Empty username", async ({ page }) => {
-      await page.locator(selectors.password).fill(valid.password);
+      await page.locator(selectors.password).fill(validData.password);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toContainText(
@@ -72,7 +72,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
     });
 
     test("Empty password", async ({ page }) => {
-      await page.locator(selectors.username).fill(valid.username);
+      await page.locator(selectors.username).fill(validData.username);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toContainText(
@@ -81,8 +81,8 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
     });
 
     test("Username too short", async ({ page }) => {
-      await page.locator(selectors.username).fill(invalid.shortUser);
-      await page.locator(selectors.password).fill(valid.password);
+      await page.locator(selectors.username).fill(invalidData.shortUser);
+      await page.locator(selectors.password).fill(validData.password);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toContainText(
@@ -91,8 +91,8 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
     });
 
     test("Password with only spaces", async ({ page }) => {
-      await page.locator(selectors.username).fill(valid.username);
-      await page.locator(selectors.password).fill(invalid.spacesOnly);
+      await page.locator(selectors.username).fill(validData.username);
+      await page.locator(selectors.password).fill(invalidData.spacesOnly);
       await page.locator(selectors.registerBtn).click();
 
       await expect(page.locator(selectors.message)).toContainText(
