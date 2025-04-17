@@ -66,7 +66,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
       await page.locator(selectors.password).fill(validData.password);
       await page.locator(selectors.registerBtn).click();
 
-      await expect(page.locator(selectors.message)).toContainText(
+      await expect(page.locator(selectors.message)).toHaveText(
         "Username is required"
       );
     });
@@ -75,7 +75,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
       await page.locator(selectors.username).fill(validData.username);
       await page.locator(selectors.registerBtn).click();
 
-      await expect(page.locator(selectors.message)).toContainText(
+      await expect(page.locator(selectors.message)).toHaveText(
         "Password is required"
       );
     });
@@ -85,7 +85,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
       await page.locator(selectors.password).fill(validData.password);
       await page.locator(selectors.registerBtn).click();
 
-      await expect(page.locator(selectors.message)).toContainText(
+      await expect(page.locator(selectors.message)).toHaveText(
         "Username should contain at least 3 characters"
       );
     });
@@ -95,7 +95,7 @@ test.describe("[SMOKE] [Login-form] Register form", () => {
       await page.locator(selectors.password).fill(invalidData.spacesOnly);
       await page.locator(selectors.registerBtn).click();
 
-      await expect(page.locator(selectors.message)).toContainText(
+      await expect(page.locator(selectors.message)).toHaveText(
         "Password is required"
       );
     });
