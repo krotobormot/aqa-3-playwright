@@ -1,5 +1,4 @@
 import test, { expect } from "@playwright/test";
-import { COUNTRIES } from "data/customers/countries.data";
 import { generateCustomerData } from "data/customers/generateCustomer.data";
 import { NOTIFICATIONS } from "data/notifications.data";
 import { AddNewCustomerPage } from "ui/pages/customers/add-new-customer.page";
